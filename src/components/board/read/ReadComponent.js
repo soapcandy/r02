@@ -22,7 +22,7 @@ const ReadComponent = ({ bno }) => {
     }, [bno])
 
     return (
-        <div className="text-white text-2xl font-bold m-2 p-2">
+        <div className="text-2xl font-bold m-2 p-2">
             <div className="border-2 border-gray-400">
                 <span>Number - </span>
                 {board.bno}

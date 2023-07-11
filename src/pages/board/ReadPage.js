@@ -17,7 +17,7 @@ const ReadPage = () => {
 
             <ReadComponent bno={bno}></ReadComponent>
 
-            <button className="border-2 border-gray-400 text-xl font-bold text-white m-2" onClick={e => moveList()}> List</button>
+            <button className="border-2 border-gray-400 text-xl font-bold m-2" onClick={e => moveList()}> List</button>
 
             <ReplyWrapper bno={bno}></ReplyWrapper>
         </div>

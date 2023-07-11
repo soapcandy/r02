@@ -37,13 +37,13 @@ const ReplyList = ({ bno, page, last, refresh, movePage, changeCurrent }) => {
 
     return (
 
-        <div className="border-2 border-black text-white">
+        <div className="border-2 border-black">
             <div className="border-b-2">
                 Reply List
             </div>
             <div>
                 <ul>
-                <li className="text-white border-2">
+                <li className="border-2">
                         <span className="mr-2">Rno </span>
                         <span className="m-2 mr-8 text-center">ReplyContent </span>
                  

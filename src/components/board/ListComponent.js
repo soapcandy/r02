@@ -43,17 +43,17 @@ const ListComponent = ({queryObj,movePage, moveRead}) => {
 
             <div>
                 <ul >
-                    <li className="text-white font-bold">
-                        <span className="mr-2">Number </span>
-                        <span className="m-2 mr-8 text-center">Title </span>
-                        <span className="m-16">ReplyCounts</span>
+                    <li className="font-bold border-t-4 border-black m-2 border-b-2">
+                        <span className="m-2 mr-10">번호 </span>
+                        <span className="m-9  text-center">제목</span>
+                        <span className="m-14">댓글수</span>
                         <span className="ml-3 m-2">Regist Date</span>
                         </li>
                     {listData.dtoList.map(
                      ({bno,title,replyCount,regDate})   =>
                      
                      <li key={bno}
-                     className="border-2 border-white text-white text-2xl font-bold"
+                     className="border-b-2 border-black text-2xl mx-2"
                      onClick={()=> moveRead(bno)}
                      >{bno} - {title}  - [{replyCount}] - {regDate}</li>)}
                 </ul>

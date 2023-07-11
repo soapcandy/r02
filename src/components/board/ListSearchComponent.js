@@ -23,8 +23,8 @@ const ListSearchComponent = ({ queryObj, moveSearch, changeSize }) => {
 
     console.log(chSize.size)
     return (
-        <div className="m-2 p-4 bg-blue-300 border-2 ">
-            <select className="boarder-2 m-2 p-2 font-medium "
+        <div className="m-2 p-4 bg-blue-300 border-2">
+            <select className="boarder-2 m-2 p-2 font-medium"
                 value={searchObj.type}
                 onChange={e => {
                     searchObj.type = e.target.value
@@ -50,13 +50,14 @@ const ListSearchComponent = ({ queryObj, moveSearch, changeSize }) => {
             ></input>
 
             <button
-                className="border-2 m-2 p-2 text-white font-extrabold rounded-lg"
-                onClick={e => moveSearch(searchObj.type, searchObj.keyword)}
-            >SEARCH</button>
+                className="border-2 m-2 p-2 font-extrabold rounded-lg"
+                onClick={e => moveSearch(searchObj.type, searchObj.keyword)}>
+                SEARCH
+            </button>
 
             <select className="boarder-2 m-2 p-2 font-bold"
                 value={chSize.size}
-                onChange={e => handleSize(e) }
+                onChange={e => handleSize(e)}
             >
                 <option value={5}>5</option>
                 <option value={10}>10</option>
