@@ -2,20 +2,20 @@ import { useRef, useState } from "react";
 import { postProduct } from "../../api/productAPI";
 
 const initState = {
-    pname: 'Ice Coffee',
-    pdesc: 'Coffee.....',
-    price: 4000
+    pname:'Ice Coffee',
+    pdesc:'Coffee.....',
+    price:4000
 }
 
-const RegisterComponent = ({ moveList }) => {
+const RegisterComponent = ({moveList}) => {
 
     const fileRef = useRef()
-    const [product, setProduct] = useState({ ...initState })
+    const [product, setProduct] = useState({...initState})
 
     const handleChange = (e) => {
         product[e.target.name] = e.target.value
 
-        setProduct({ ...product })
+        setProduct({...product})
     }
 
     const handleClickSave = (e) => {
@@ -30,13 +30,13 @@ const RegisterComponent = ({ moveList }) => {
 
         const arr = fileRef.current.files
 
-        for (let file of arr) {
+        for(let file of arr){
             formData.append("files", file)
         }
-
+        
         postProduct(formData).then(data => {
             const rno = data.result
-            alert(`${rno}번 상품이 등록되었습니다`)
+            alert(`${rno}번 상품이 등록되었음`)
             moveList()
         })
 
@@ -52,14 +52,14 @@ const RegisterComponent = ({ moveList }) => {
             <div className="m-2 p-2 border-2">
                 <input type='text' name='pname' value={product.pname} onChange={handleChange}></input>
             </div>
-            <div className="m-2 p-2 border-2">
+            <div className="m-2 p-2 border-2"> 
                 <input type='text' name='pdesc' value={product.pdesc} onChange={handleChange}></input>
             </div>
             <div className="m-2 p-2 border-2">
                 <input type='number' name='price' value={product.price} onChange={handleChange}></input>
             </div>
             <div className="m-2 p-2 border-2">
-                <input type='file' ref={fileRef} multiple name='images' onChange={handleChange}></input>
+                <input type='file' ref={fileRef} multiple name='images'  onChange={handleChange}></input>
             </div>
             <div className="m-2 p-2 border-2"   >
                 <button onClick={handleClickSave}>SAVE</button>
@@ -68,5 +68,5 @@ const RegisterComponent = ({ moveList }) => {
         </div>
     );
 }
-
+ 
 export default RegisterComponent

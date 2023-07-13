@@ -9,7 +9,7 @@ const initState = {
     images: []
 }
 
-const ReadComponent = ({ pno }) => {
+const ReadComponent = ({ pno, moveModify, moveList }) => {
 
     const [product, setProduct] = useState(initState)
 
@@ -17,6 +17,8 @@ const ReadComponent = ({ pno }) => {
 
         getProduct(pno).then(data => {
             setProduct(data)
+        }).catch(e => {
+            console.log(e)
         })
     }, [pno])
 
@@ -40,6 +42,16 @@ const ReadComponent = ({ pno }) => {
                                 <img src={`http://localhost/${fname}`} alt="빵통조림"></img>
                             </li>)}
                     </ul>
+                </div>
+                <div>
+                    <button className="bg-blue-400 border-2 m-2 p-2 text-white font-extrabold"
+                        onClick={moveList}>
+                        List
+                    </button>
+                    <button className="bg-orange-400 border-2 m-2 p-2 text-white font-extrabold"
+                        onClick={() => moveModify(product.pno)}>
+                        Modify
+                    </button>
                 </div>
             </div>
         </div>
