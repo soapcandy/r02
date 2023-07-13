@@ -1,71 +1,54 @@
 import { useEffect, useState } from "react";
 
 
-const ListSearchComponent = ({ queryObj, moveSearch, changeSize }) => {
-
-    const [chSize, setChSize] = useState({ size: 10 })
-    const [searchObj, setSearchObj] = useState({ type: '', keyword: '' })
-
-    // 무한 렌더링 방지 처리
-    useEffect(() => {
-
-        searchObj.type = queryObj.type || ''
-        searchObj.keyword = queryObj.keyword || ''
-        chSize.size = queryObj.size || 10
-        setSearchObj({ ...searchObj })
-        setChSize({ ...chSize })
-    }, [queryObj])
-
-    const handleSize = (e) => {
-        chSize.size = e.target.value
-        changeSize(chSize.size)
-    }
-
-    console.log(chSize.size)
-    return (
-        <div className="m-2 p-4 bg-blue-300 border-2">
-            <select className="boarder-2 m-2 p-2 font-medium"
-                value={searchObj.type}
-                onChange={e => {
-                    searchObj.type = e.target.value
-                    setSearchObj({ ...searchObj })
-                }}
-            >
-                <option value={''}>------</option>
-                <option value={'t'}>제목</option>
-                <option value={'c'}>내용</option>
-                <option value={'w'}>작성자</option>
-                <option value={'tc'}>제목+내용</option>
-                <option value={'tcw'}>제목+내용+작성자</option>
-            </select>
-
-            <input
-                type="text"
-                className="border-1 m-2 p-2"
-                value={searchObj.keyword}
-                onChange={e => {
-                    searchObj.keyword = e.target.value
-                    setSearchObj({ ...searchObj })
-                }}
-            ></input>
-
-            <button
-                className="border-2 m-2 p-2 font-extrabold rounded-lg"
-                onClick={e => moveSearch(searchObj.type, searchObj.keyword)}>
-                SEARCH
-            </button>
-
-            <select className="boarder-2 m-2 p-2 font-bold"
-                value={chSize.size}
-                onChange={e => handleSize(e)}
-            >
-                <option value={5}>5</option>
-                <option value={10}>10</option>
-                <option value={15}>15</option>
-                <option value={20}>20</option>
-            </select>
-        </div>
-    );
+const initState =  {
+  type:'',
+  keyword:''
 }
 
+const ListSearchComponent = ({queryObj, searchFn}) => {
+
+  const [search, setSearch] = useState(initState)
+
+  useEffect(() => {
+
+    search.type = queryObj.type || ''
+    search.keyword = queryObj.keyword || ''
+    setSearch( {...search})
+
+  }, [queryObj])
+
+
+
+  return (  
+    <div className="border-solid border-2 border-indigo-600 m-4 p-4">
+      <select className="border-2 m-1 p-1" 
+        value={search.type}
+        onChange={ e =>  {
+          search.type = e.target.value
+          setSearch({...search})
+        }}
+        >
+        <option value="">---</option>
+        <option value="t">T</option>
+        <option value="c">C</option>
+        <option value="w">W</option>
+        <option value="tc">TC</option>
+        <option value="tcw">TCW</option>
+        
+      </select>
+      <input type="text" className="border-2 m-1 p-1"  name="keyword" 
+      value={search.keyword}
+      onChange={e =>  {
+        search.keyword = e.target.value
+        setSearch({...search})
+      }}
+      ></input>
+      <button className="border-2 m-1 p-1 "
+      onClick={ e => searchFn(search.type, search.keyword)}
+      >Search</button>
+  </div>
+  );
+}
+ 
 export default ListSearchComponent;

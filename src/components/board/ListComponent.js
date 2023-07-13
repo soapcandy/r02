@@ -1,66 +1,56 @@
-
-//실제 axios에  전달하고 responseDTO를 받아서 처리해주는 Component
-
 import { useEffect, useState } from "react";
-import { createSearchParams } from "react-router-dom";
+
 import { getList } from "../../api/boardAPI";
 import ListPageComponent from "../common/ListPageComponent";
 
 
 const initState = {
-    dtoList:[],
-    end:0,
-    start:0,
-    next:false,
-    prev:false,
-    pageNums:[],
-    page:0,
-    size:0,
-    requestDTO: null
+  dtoList:[],
+  end:0,
+  start:0,
+  next:false,
+  prev:false,
+  pageNums:[],
+  page:0,
+  size:0,
+  requestDTO: null
 }
 
 
-const ListComponent = ({queryObj,movePage, moveRead}) => {
-    // rendering시 에러방지
-    const [listData, setListData] = useState(initState)
+const ListComponent = ({queryObj, movePage, moveRead}) => {
 
-    // use가 붙으면 component 에서만 쓸수있다.
-    // 그외는 자체적으로 제공하는 함수라 생각한다.
-    useEffect(()=>{
-
-        getList(queryObj).then(data =>{
-            console.log(data)
-            setListData(data)
-        })
-
-    },[queryObj])
+  const [listData, setListData] = useState(initState)
 
   
-    return (  
-        <div>
+  useEffect(() => {
 
-            {/* QueryObj는 필요함 search type keyword가 들어가야되기떄문 */}
+    getList(queryObj).then(data => {
+      console.log(data)
+      setListData(data)
+    })
 
-            <div>
-                <ul >
-                    <li className="font-bold border-t-4 border-black m-2 border-b-2">
-                        <span className="m-2 mr-10">번호 </span>
-                        <span className="m-9  text-center">제목</span>
-                        <span className="m-14">댓글수</span>
-                        <span className="ml-3 m-2">Regist Date</span>
-                        </li>
-                    {listData.dtoList.map(
-                     ({bno,title,replyCount,regDate})   =>
-                     
-                     <li key={bno}
-                     className="border-b-2 border-black text-2xl mx-2"
-                     onClick={()=> moveRead(bno)}
-                     >{bno} - {title}  - [{replyCount}] - {regDate}</li>)}
-                </ul>
-            </div>
-            <ListPageComponent movePage={movePage} {...listData}></ListPageComponent>
-        </div>
-    );
+  },[queryObj])
+
+
+
+  return ( 
+    <div className="m-2 p-2 border-2 bg-blue-400">
+      <div> ListComponent</div>
+
+      <div>
+        <ul>
+          {listData.dtoList.map( dto =>
+            <li 
+            key={dto.bno}
+            onClick={() => moveRead(dto.bno)}
+            >{dto.bno} - {dto.title} - {dto.replyCount}</li>)}
+        </ul>
+      </div>
+
+      <ListPageComponent movePage={movePage} {...listData}></ListPageComponent>
+
+    </div>
+   );
 }
  
 export default ListComponent;

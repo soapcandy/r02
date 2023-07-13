@@ -8,9 +8,7 @@ const initState = {
     bno: 0,
     page: 1,
     last: false,
-    // 상태를 계속 바꾸게하기 위한 변수
-    refresh: false,
-    // read값의 cmd 작업을 위한 변수
+    refresh:false,
     current:0
 }
 
@@ -31,48 +29,51 @@ const ReplyWrapper = ({bno}) => {
 
     },[bno])
 
-    // page를 바꿔주는 기능 설정 num 을 받아서 변경
-    const movePage =  (num) => {
-        console.log(num)
-        data.page = num
-        // 변경이 안된다. why? last가 true값으로 고정되있기때문에 last를 false로 변경해 줘야된다.
-        data.last = false
-        data.refresh = ! data.refresh
+    const changeCurrent = (rno) => {
+        data.current = rno
         setData({...data})
     }
-    
-    const refreshLast = () =>{
-        
-        data.last =true
+
+    // page를 바꿔주는 기능 설정 num 을 받아서 변경
+    const movePage =  (num) => {
+
+        console.log("num: " + num)
+        data.page = num
+        data.last=false
         data.refresh = !data.refresh
         setData({...data})
     }
 
-    const changeCurrent = (rno) =>{
-        data.current = rno
+    const refreshLast = () =>{
+        data.last = true
+        data.refresh = !data.refresh
         setData({...data})
     }
-    const cancelRead = () =>{
-        data.current= 0 
+
+    const cancelRead = () => {
+        data.current = 0
         setData({...data})
     }
-    // 강제 리로딩 함수
-    const refreshPage = (hide) =>{
-        data.refresh =  !data.refresh
+
+    const refreshPage = (hide) => {
+        data.refresh = !data.refresh
+
         if(hide){
             data.current = 0
         }
+
         setData({...data})
     }
    
     return (  
         <div>
             <ReplyInput bno={bno} refreshLast={refreshLast}></ReplyInput>
-            {/*  current값을 기준으로 삼항연산자 처리 */}
-            {data.current!== 0 ? <ReplyRead 
+
+            {data.current !== 0 ? <ReplyRead 
             rno={data.current} 
-            refreshPage={refreshPage} 
-            cancelRead={cancelRead}></ReplyRead>:<></>}
+            cancelRead={cancelRead}
+            refreshPage={refreshPage}></ReplyRead>:<></>}
+
             <ReplyList {...data} movePage={movePage} changeCurrent={changeCurrent}></ReplyList>
         </div>
     );

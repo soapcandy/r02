@@ -1,27 +1,25 @@
 import { useParams } from "react-router-dom";
 import useQueryObj from "../../hooks/useQueryObj";
-import ReadComponent from "../../components/board/read/ReadComponent";
 import ReplyWrapper from "../../components/reply/ReplyWrapper";
+
 
 const ReadPage = () => {
 
-    const {queryObj,moveList} = useQueryObj()
-    const {bno} = useParams()
-    
-    
-    console.log(bno)
-    console.log(queryObj)
+  const [queryObj, setSearch,moveRead, moveList] = useQueryObj()
+  const {bno} = useParams()
 
-    return (  
-        <div>
+  console.log(bno)
+  console.log(queryObj)
 
-            <ReadComponent bno={bno}></ReadComponent>
+  return ( 
+    <div>
+      Board Read Page
 
-            <button className="border-2 border-gray-400 text-xl font-bold m-2" onClick={e => moveList()}> List</button>
+      <ReplyWrapper bno={bno}></ReplyWrapper>
 
-            <ReplyWrapper bno={bno}></ReplyWrapper>
-        </div>
-    );
+      <button onClick={e => moveList()}>List</button>
+    </div>
+  );
 }
  
 export default ReadPage;

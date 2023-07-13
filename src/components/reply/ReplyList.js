@@ -32,25 +32,21 @@ const ReplyList = ({ bno, page, last, refresh, movePage, changeCurrent }) => {
             setListData(data)
         })
 
-    }, [bno,page, last, refresh])
+    }, [bno, page, last, refresh])
 
 
     return (
 
-        <div className="border-2 border-black">
-            <div className="border-b-2">
+        <div>
+            <div>
                 Reply List
             </div>
             <div>
                 <ul>
-                <li className="border-2">
-                        <span className="mr-2">Rno </span>
-                        <span className="m-2 mr-8 text-center">ReplyContent </span>
-                 
-                        </li>
-                    {listData.dtoList.map( reply => <li key={reply.rno}
-                    className="border-2"
-                    onClick={ ()=>changeCurrent(reply.rno)}
+                    {listData.dtoList.map( reply => 
+                    <li 
+                    key={reply.rno}
+                    onClick={() => changeCurrent(reply.rno)}
                     >
                         {reply.rno} -- {reply.replyText}
                     </li>)}
