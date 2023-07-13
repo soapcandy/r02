@@ -3,14 +3,14 @@ import { deleteProduct, getProduct, putProduct } from "../../api/productAPI"
 
 
 const initState = {
-    pno:0,
-    pname:'',
-    pdesc:'',
-    price:0,
-    images:[]
+    pno: 0,
+    pname: '',
+    pdesc: '',
+    price: 0,
+    images: []
 }
 
-const ModifyComponent = ({pno, moveList, moveRead}) => {
+const ModifyComponent = ({ pno, moveList, moveRead }) => {
 
     const fileRef = useRef()
     const [product, setProduct] = useState(initState)
@@ -19,20 +19,20 @@ const ModifyComponent = ({pno, moveList, moveRead}) => {
         getProduct(pno).then(data => {
             setProduct(data)
         })
-    },[pno])
+    }, [pno])
 
     const handleClickDelete = () => {
 
         deleteProduct(pno).then(data => {
             alert("상품삭제")
-        }) 
+        })
     }
     const handleChange = (e) => {
 
         console.log("handle change..........")
         product[e.target.name] = e.target.value
 
-        setProduct({...product})
+        setProduct({ ...product })
     }
 
     const handleClickModify = () => {
@@ -44,8 +44,8 @@ const ModifyComponent = ({pno, moveList, moveRead}) => {
         formData.append("pdesc", product.pdesc)
         formData.append("price", product.price)
 
-        if(product.images){
-            for (let pi of product.images){
+        if (product.images) {
+            for (let pi of product.images) {
                 formData.append("images", pi)
             }
         }
@@ -53,7 +53,7 @@ const ModifyComponent = ({pno, moveList, moveRead}) => {
 
         const arr = fileRef.current.files
 
-        for(let file of arr){
+        for (let file of arr) {
             formData.append("files", file)
         }
 
@@ -62,33 +62,42 @@ const ModifyComponent = ({pno, moveList, moveRead}) => {
         })
     }
 
+    const handleClickDelImg = (fname) => {
 
-    return ( 
+        const newArr = product.images.filter(ele => ele !== fname)
+
+        product.images = newArr
+
+        setProduct({ ...product })
+    }
+
+
+    return (
         <div>
             <div className="m-2 p-2 border-2">
                 {product.pno}
             </div>
 
             <div className="m-2 p-2 border-2">
-                <input 
-                 type='text' 
-                 name="pname" 
-                 value={product.pname} 
-                 onChange={handleChange} />
-            </div>
-            <div className="m-2 p-2 border-2"> 
-                <input 
-                 type='text' 
-                 name="pdesc" 
-                 value={product.pdesc} 
-                 onChange={handleChange} />
+                <input
+                    type='text'
+                    name="pname"
+                    value={product.pname}
+                    onChange={handleChange} />
             </div>
             <div className="m-2 p-2 border-2">
-                <input 
-                 type='number' 
-                 name="price" 
-                 value={product.price} 
-                 onChange={handleChange} />
+                <input
+                    type='text'
+                    name="pdesc"
+                    value={product.pdesc}
+                    onChange={handleChange} />
+            </div>
+            <div className="m-2 p-2 border-2">
+                <input
+                    type='number'
+                    name="price"
+                    value={product.price}
+                    onChange={handleChange} />
             </div>
 
             <div className="m-2 p-2 border-2">
@@ -97,40 +106,44 @@ const ModifyComponent = ({pno, moveList, moveRead}) => {
 
             <div className="m-2 p-2 border-2"   >
                 <ul className="list-none flex">
-                    {product.images.map( (fname,idx) => 
-                    <li 
-                    key={idx}
-                    className="m-2"
-                    >
-                       <img src={`http://localhost/s_${fname}`}></img> 
-                    </li>)}
+                    {product.images.map((fname, idx) =>
+                        <li
+                            key={idx}
+                            className="m-2"
+                        >
+                            <img src={`http://localhost/s_${fname}`}></img>
+                            <button className="bg-red-500 m-2 p-2"
+                                onClick={() => handleClickDelImg(fname)}>
+                                x
+                            </button>
+                        </li>)}
                 </ul>
             </div>
 
             <div>
-                <button 
-                className="bg-fuchsia-600 border-2 m-2 p-2 text-white font-bold"
-                onClick={handleClickModify}
+                <button
+                    className="bg-fuchsia-600 border-2 m-2 p-2 text-white font-bold"
+                    onClick={handleClickModify}
                 >
                     Modify
                 </button>
 
-                <button 
-                className="bg-blue-500 border-2 m-2 p-2 text-white font-bold"
-                onClick={moveList}
+                <button
+                    className="bg-blue-500 border-2 m-2 p-2 text-white font-bold"
+                    onClick={moveList}
                 >
                     List
-                </button>                
-                
-                <button 
-                className="bg-red-500 border-2 m-2 p-2 text-white font-bold"
-                onClick={handleClickDelete}
+                </button>
+
+                <button
+                    className="bg-red-500 border-2 m-2 p-2 text-white font-bold"
+                    onClick={handleClickDelete}
                 >
                     Delete
                 </button>
             </div>
         </div>
-     );
+    );
 }
- 
+
 export default ModifyComponent;
