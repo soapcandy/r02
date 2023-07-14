@@ -13,6 +13,7 @@ const loginSlice = createSlice ({
         requestLogin: (state, param) =>{
             const payload = param.payload
             console.log("requsetLogin", payload)
+            return {email: payload.email, signed:true}
         }
     }
 
