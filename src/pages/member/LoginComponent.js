@@ -4,7 +4,7 @@ import { requestLogin } from "../../reducers/loginSlice";
 
 
 const initState = {
-    email: 'user@naver.com',
+    email: 'Bazzi@nexon.com',
     pw: '1111'
 }
 
