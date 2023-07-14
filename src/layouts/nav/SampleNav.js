@@ -1,5 +1,6 @@
 import { useSelector } from 'react-redux';
 import {Link} from 'react-router-dom'
+import LoginNav from './LoginNav';
 
 const SampleNav = () => {
 
@@ -7,6 +8,7 @@ const SampleNav = () => {
 
   return ( 
     <div className='flex m-6 p-4 text-white font-extrabold'>
+      
       <div className='m-4 text-4xl border-2' >
         <Link to="/">Main</Link>
         <span className='bg-red-500 font-extrabold'>{todoArr.length}</span>
@@ -20,7 +22,10 @@ const SampleNav = () => {
       <div  className='m-4 text-4xl border-2'>
         <Link to="/board/list">Board</Link>
       </div>
-      
+      <div>
+        <LoginNav></LoginNav>
+      </div>
+
     </div>
   );
 }
