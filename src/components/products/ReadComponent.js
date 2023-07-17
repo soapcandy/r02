@@ -52,6 +52,18 @@ const ReadComponent = ({ pno, moveModify, moveList }) => {
                         onClick={() => moveModify(product.pno)}>
                         Modify
                     </button>
+                    <button
+                        className="bg-blue-300 border-2 m-2 p-2 text-white font-bold"
+                        onClick={moveList}>
+                        List
+                    </button>
+                    <button
+                        className="bg-blue-300 border-2 m-2 p-2 text-white font-bold"
+                        onClick={() => {
+                            dispatch(addCartThunk({ email, pno }))
+                        }}>
+                        addCart
+                    </button>
                 </div>
             </div>
         </div>
