@@ -25,7 +25,7 @@ const LoginComponent = () => {
             <div>
                 {errorMsg ? <div className="bg-red-300">이메일과 패스워드를 확인하세요</div> : ''}
             </div>
-            <div className="h-[40vh] bg-white w-[45vh] my-20 mx-auto">
+            <div className="h-[40vh] w-[45vh] my-auto mx-auto">
                 <div className="pt-[15vh] px-2 ">
                     <div className="overflow-hidden ">
                         <label className="float-left">email</label>
@@ -44,7 +44,7 @@ const LoginComponent = () => {
                     </div>
                     <div >
                         <button
-                            className="mt-5 border-slate-700 border-2 p-2 "
+                            className="mt-5 border-slate-700 border-2 p-2 w-[43vh] "
                             onClick={() => dispatch(postLoginThunk(loginInfo))}>LOGIN</button>
                     </div>
                 </div>

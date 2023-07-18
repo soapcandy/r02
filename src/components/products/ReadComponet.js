@@ -47,13 +47,13 @@ const ReadComponent = ({pno, moveModify, moveList}) => {
             </div>
             <div>
                 <button 
-                className="bg-orange-400 border-2 m-2 p-2 text-white font-bold"
+                className="bg-orange-400 border-2 m-2 p-2 font-bold"
                 onClick={() => moveModify(product.pno)}
                 >
                     Modify
                 </button>
                 <button 
-                className="bg-blue-500 border-2 m-2 p-2 text-white font-bold"
+                className="bg-blue-500 border-2 m-2 p-2 font-bold"
                 onClick={moveList}
                 >
                     List

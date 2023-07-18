@@ -124,21 +124,21 @@ const ModifyComponent = ({ pno, moveList, moveRead }) => {
 
             <div>
                 <button
-                    className="bg-fuchsia-600 border-2 m-2 p-2 text-white font-bold"
+                    className="bg-fuchsia-600 border-2 m-2 p-2 font-bold"
                     onClick={handleClickModify}
                 >
                     Modify
                 </button>
 
                 <button
-                    className="bg-blue-500 border-2 m-2 p-2 text-white font-bold"
+                    className="bg-blue-500 border-2 m-2 p-2 font-bold"
                     onClick={moveList}
                 >
                     List
                 </button>
 
                 <button
-                    className="bg-red-500 border-2 m-2 p-2 text-white font-bold"
+                    className="bg-red-500 border-2 m-2 p-2 font-bold"
                     onClick={handleClickDelete}
                 >
                     Delete
