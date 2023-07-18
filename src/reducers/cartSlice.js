@@ -38,7 +38,7 @@ const cartSlice = createSlice({
         })
         .addCase(getCartThunk.fulfilled,(state, action)=> {
             console.log("getCartThunk fulfilled : " , action.payload)
-            state.items.push(action.payload)
+            state.items = action.payload
         })
     }
 

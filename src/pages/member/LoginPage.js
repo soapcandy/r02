@@ -1,5 +1,7 @@
+import KakaoLoginComponent from "../../components/member/KakaoLoginComponent";
+import LoginComponent from "../../components/member/LoginComponent";
 import BasicLayout from "../../layouts/BasicLayout";
-import LoginComponent from "./LoginComponent";
+
 
 
 const LoginPage = () => {
@@ -7,6 +9,7 @@ const LoginPage = () => {
         <BasicLayout>
             <div>Login Page</div>
             <LoginComponent></LoginComponent>
+            <KakaoLoginComponent></KakaoLoginComponent>
         </BasicLayout>
      );
 }

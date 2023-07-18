@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { getProduct } from "../../api/productAPI";
+import { useDispatch, useSelector } from "react-redux";
+import { addCartThunk } from "../../reducers/cartSlice";
 
 const initState = {
     pno: 0,
@@ -10,6 +12,9 @@ const initState = {
 }
 
 const ReadComponent = ({ pno, moveModify, moveList }) => {
+
+    const {email} = useSelector(state => state.login)
+    const dispatch = useDispatch()
 
     const [product, setProduct] = useState(initState)
 
