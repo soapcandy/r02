@@ -1,5 +1,5 @@
 import axios from "axios";
-import { getCookie } from "./cookieUtil";
+import { getCookie, setCookie } from "./cookieUtil";
 
 const jwtAxios = axios.create()
 
@@ -25,11 +25,40 @@ const requestFail = (err) => {
     return Promise.reject(err)
 }
 
-const beforeRes = (res) => {
+const beforeRes = async(res) => {
 
     console.log("2xx Response............")
 
+    if(res.data.error === 'Expired') {
+
+        console.log("Access Token has expired")
+
+        refreshJWT()
+    }
+
     return res
+}
+
+const refreshJWT = async() => {
+    
+    const cookieValue = getCookie("login")
+
+    const {accessToken, refreshToken} = cookieValue
+
+    const header = {
+        headers: {
+            "Authorization": `Bearer ${accessToken}`,	
+        }
+    }
+
+    const res = await axios.get(`http://localhost:8080/api/member/refresh?refreshToken=${refreshToken}`, header)
+
+    console.log(res.data)
+
+    cookieValue.accessToken = res.data.accessToken
+    cookieValue.refreshToken = res.data.refreshToken
+
+    setCookie("login", JSON.stringify(cookieValue), 1)
 }
 
 const responseFail = (err) => {
