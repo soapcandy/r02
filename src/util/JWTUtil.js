@@ -32,8 +32,15 @@ const beforeRes = async(res) => {
     if(res.data.error === 'Expired') {
 
         console.log("Access Token has expired")
+        const newAccessToken = await refreshJWT()
 
         refreshJWT()
+
+        const originalRequest = res.config
+
+        originalRequest.headers.Authorization = `Bearer ${newAccessToken}`
+
+        return await axios(originalRequest)
     }
 
     return res
@@ -55,10 +62,29 @@ const refreshJWT = async() => {
 
     console.log(res.data)
 
-    cookieValue.accessToken = res.data.accessToken
-    cookieValue.refreshToken = res.data.refreshToken
+    // cookieValue.accessToken = res.data.accessToken
+    // cookieValue.refreshToken = res.data.refreshToken
+
+    // setCookie("login", JSON.stringify(cookieValue), 1)
+
+    // return accessToken
+
+    const newAccess = res.data.accessToken
+    const newRefresh = res.data.refreshToken
+
+    console.log("--------------------------------")
+    console.log("new access :" + newAccess )
+    console.log("new refresh :" + newRefresh)
+
+
+    cookieValue.accessToken = newAccess
+    cookieValue.refreshToken = newRefresh
+    console.log("--------------------------------")
+    console.log(cookieValue)
 
     setCookie("login", JSON.stringify(cookieValue), 1)
+
+    return newAccess
 }
 
 const responseFail = (err) => {
