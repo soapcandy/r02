@@ -1,53 +1,59 @@
 import { useEffect, useState } from "react";
 
 
-const initState =  {
-  type:'',
-  keyword:''
-}
+const ListSearchComponent = ({moveSearch, queryObj}) => {
 
-const ListSearchComponent = ({queryObj, searchFn}) => {
-
-  const [search, setSearch] = useState(initState)
+  console.log("SearchComponent----------------------------")
+  
+  const [searchObj, setSearchObj] = useState({type:'',keyword:''})
 
   useEffect(() => {
 
-    search.type = queryObj.type || ''
-    search.keyword = queryObj.keyword || ''
-    setSearch( {...search})
+    searchObj.type = queryObj.type || ''
+    searchObj.keyword = queryObj.keyword ||''
 
-  }, [queryObj])
+    console.log("===========searchobj=============")
+    console.log(searchObj)
+
+    setSearchObj({...searchObj})
+
+  },[queryObj])
 
 
-
-  return (  
-    <div className="border-solid border-2 border-indigo-600 m-4 p-4">
-      <select className="border-2 m-1 p-1" 
-        value={search.type}
-        onChange={ e =>  {
-          search.type = e.target.value
-          setSearch({...search})
-        }}
-        >
-        <option value="">---</option>
-        <option value="t">T</option>
-        <option value="c">C</option>
-        <option value="w">W</option>
-        <option value="tc">TC</option>
-        <option value="tcw">TCW</option>
-        
+  return ( 
+    <div className="m-4 p-4 bg-blue-300 border-2">
+      <select 
+      className="border-1 m-2 p-2" 
+      value={searchObj.type}
+      onChange={ e => {
+        searchObj.type = e.target.value
+        setSearchObj({...searchObj})
+      }}
+      >
+        <option value={''}>---</option>
+        <option value={'t'}>제목</option>
+        <option value={'c'}>내용</option>
+        <option value={'w'}>작성자</option>
+        <option value={'tc'}>제목내용</option>
+        <option value={'tcw'}>제목내용작성자</option>
       </select>
-      <input type="text" className="border-2 m-1 p-1"  name="keyword" 
-      value={search.keyword}
-      onChange={e =>  {
-        search.keyword = e.target.value
-        setSearch({...search})
+
+      <input 
+      type='text'
+      className="border-1 m-2 p-2"
+      value={searchObj.keyword}
+      onChange={ e => {
+        searchObj.keyword = e.target.value
+        setSearchObj({...searchObj})
       }}
       ></input>
-      <button className="border-2 m-1 p-1 "
-      onClick={ e => searchFn(search.type, search.keyword)}
-      >Search</button>
-  </div>
+      
+      <button 
+      className="p-2 m-2 border-2"
+      onClick={ e => moveSearch(searchObj.type, searchObj.keyword )}
+      >SEARCH</button>
+    
+    </div>
   );
 }
  
