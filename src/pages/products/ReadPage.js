@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom"
 import useQueryObj from "../../hooks/useQueryObj"
-import ReadComponent from "../../components/products/ReadComponet"
+import ReadComponent from "../../components/products/ReadComponent"
 import useCustomLogin from "../../hooks/useCustomLogin"
 
 
